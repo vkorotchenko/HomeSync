@@ -1,159 +1,108 @@
 package vadim.homesync.settings;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.SharedPreferences;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
-import android.net.wifi.WifiInfo;
-import android.net.wifi.WifiManager;
-import android.util.Log;
+
+import vadim.homesync.util.Setting;
 
 public class SettingsManager {
-    public static final String CONFIG_NAME = "MyConfigFile";
+    private static final String CONFIG_NAME = "MyConfigFile";
 
-	public static void saveAddress(Activity context, String address) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("address", address);
-
-		editor.commit();
-		
+	public static void saveAddress(Activity context, String value) {
+		saveValue(context, Setting.SERVER_IP.getKey(), value);
 	}
 
-	public static void savePort(Activity context, String port) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("port", port);
-
-		editor.commit();
-		
+	public static void savePort(Activity context, String value) {
+		saveValue(context, Setting.SERVER_PORT.getKey(), value);
 	}
-	public static void saveRemoteAddress(Activity context, String address) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("remote_address", address);
-
-		editor.commit();
-		
+	public static void saveRemoteAddress(Activity context, String value) {
+		saveValue(context, Setting.REMOTE_IP.getKey(), value);
 	}
 
-	public static void saveMsgType(Activity context, String type) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("msg_type", type);
-
-		editor.commit();
-		
-	}
-	
-
-
-	public static void saveHomeNetwork(Activity context,
-                                       String network) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("home_network", network);
-
-		editor.commit();
-		
+	public static void saveMsgType(Activity context, String value) {
+		saveValue(context, Setting.MSG_PROTOCOL.getKey(), value);
 	}
 
-	public static void saveExternalAddress(Activity context,
-                                           String external) {
-		// We need an Editor object to make preference changes.
-		// All objects are from android.context.Context
+	public static void saveHomeSsid(Activity context, String value) {
+		saveValue(context, Setting.HOME_SSID.getKey(), value);
+	}
+
+	public static void saveExternalAddress(Activity context, String value) {
+		saveValue(context, Setting.EXTERNAL_IP.getKey(), value);
+	}
+
+	public static void saveExternalPort(Activity context, String value) {
+		saveValue(context, Setting.EXTERNAL_PORT.getKey(), value);
+	}
+
+	private static void saveValue (Activity context, String key, String value) {
 		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
 		SharedPreferences.Editor editor = settings.edit();
-		
-		editor.putString("external_address", external);
-
-		editor.commit();
-		
+		editor.putString(key, value);
+		editor.apply();
 	}
-	
+
+
+	/*
+		GETTERS
+	 */
 
 	public static CharSequence getAddress(Activity context) {
-		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-	    
-		if (mWifi.isConnected()) {
-			  WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-			   WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-			   Log.d("wifiInfo", wifiInfo.toString());
-			   Log.d("SSID",wifiInfo.getSSID());
-			   
-			   String home_network =settings.getString("home_network", "KOR");
-			   Log.d("HOME NETWORK",home_network);
-			   if(wifiInfo.getSSID().replaceAll("\"", "").equals(home_network)){
-				   return settings.getString("address", "192.168.1.1");
-			   }else{
-				   return settings.getString("external_address", "test1.dyndns.org");
-				   
-			   }
-		}else{
-			   return settings.getString("external_address", "test1.dyndns.org");
-			
-		}
+		return getValue(context, Setting.SERVER_IP);
+//		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+//		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
+//
+//	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
+//
+//		if (mWifi.isConnected()) {
+//			  WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+//			   WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+//			   Log.d("wifiInfo", wifiInfo.toString());
+//			   Log.d("SSID",wifiInfo.getSSID());
+//
+//			   String home_network =settings.getString("home_network", "KOR");
+//			   Log.d("HOME NETWORK",home_network);
+//			   if(wifiInfo.getSSID().replaceAll("\"", "").equals(home_network)){
+//				   return settings.getString("address", "192.168.1.1");
+//			   }else{
+//				   return settings.getString("external_address", "test1.dyndns.org");
+//
+//			   }
+//		}else{
+//			   return settings.getString("external_address", "test1.dyndns.org");
+//
+//		}
 	    
 	}
-
 	public static CharSequence getPort(Activity context) {
-		
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-	    String port = settings.getString("port", "8080");
-	    
-	    return port;
+		return getValue(context, Setting.SERVER_PORT);
 	}
 
 	public static CharSequence getMsgType(Activity context) {
-		
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-	    String msg_type = settings.getString("msg_type", "UART");
-	    
-	    return msg_type;
+		return getValue(context, Setting.MSG_PROTOCOL);
 	}
 
 	public static CharSequence getRemoteAddress(Activity context) {
-		
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-	    String address = settings.getString("remote_address", "192.168.1.1");
-	    
-	    return address;
+		return getValue(context, Setting.REMOTE_IP);
 	}
 	
-	public static CharSequence getExternal(Activity context) {
-		
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-	    String ext = settings.getString("external_address", "test1.dyndns.org");
-	    
-	    return ext;
-	    
-	}public static CharSequence getHomeNetwork(Activity context) {
-		
-	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-		String home_network =settings.getString("home_network", "KOR");
-	    
-	    return home_network;
+	public static CharSequence getExternalIp(Activity context) {
+		return getValue(context, Setting.EXTERNAL_IP);
 	}
-	
+
+	public static CharSequence getExternalPort(Activity context) {
+		return getValue(context, Setting.EXTERNAL_PORT);
+	}
+
+	public static CharSequence getHomeSsid(Activity context) {
+		return getValue(context, Setting.HOME_SSID);
+	}
+
+
+	public static CharSequence getValue(Activity context, Setting setting) {
+		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
+		return settings.getString(setting.getKey(), setting.getDefaultValue());
+	}
 	
 
 }
