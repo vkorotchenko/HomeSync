@@ -1,5 +1,6 @@
 package vadim.homesync;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -12,6 +13,8 @@ import androidx.appcompat.widget.Toolbar;
 import com.joshsera.PadActivity;
 
 import vadim.homesync.rest.RestClient;
+import vadim.homesync.util.ConnectionUtils;
+import vadim.homesync.util.HttpUtils;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -21,9 +24,19 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         rest_client = new RestClient(this);
+
+        //save external address if on WiFi
+        populateExternalIp(this);
+
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+    }
+
+    private void populateExternalIp(Context context) {
+        if(ConnectionUtils.isConnectedToHomeWiFi(context)) {
+            HttpUtils.setExternal(context);
+        }
     }
 
     @Override

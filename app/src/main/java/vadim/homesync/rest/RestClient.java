@@ -2,8 +2,10 @@ package vadim.homesync.rest;
 
 import android.app.Activity;
 import android.content.Context;
+import android.util.Pair;
 
 import vadim.homesync.settings.SettingsManager;
+import vadim.homesync.util.ConnectionUtils;
 import vadim.homesync.util.HttpUtils;
 
 public class RestClient {
@@ -20,13 +22,12 @@ public class RestClient {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     private String getBaseURIString() {
-        String address = (String) SettingsManager.getAddress((Activity) this.context);
-        String port = (String) SettingsManager.getPort((Activity) this.context);
-
+        Pair connection = ConnectionUtils.getConnection(context);
+        String address = (String) connection.first;
+        String port = (String) connection.second;
 
         return "http://" + address + ":" + port + "/api/rest/Remote";
     }
