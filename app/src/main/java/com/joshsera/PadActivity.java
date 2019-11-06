@@ -1985,11 +1985,11 @@ public class PadActivity extends Activity {
 	// }
 
 	private void drawButtonOn(FrameLayout fl) {
-		fl.setBackgroundResource(R.drawable.left_button_on);
+		//fl.setBackgroundResource(R.drawable.ic_button_outline);
 	}
 
 	private void drawButtonOff(FrameLayout fl) {
-		fl.setBackgroundResource(R.drawable.left_button_off);
+		//fl.setBackgroundResource(R.drawable.ic_button_outline);
 	}
 
 	private void drawSoftOn() {
@@ -1997,6 +1997,6 @@ public class PadActivity extends Activity {
 	}
 
 	private void drawSoftOff() {
-		this.flMidButton.setBackgroundResource(R.drawable.keyboard_off);
+		this.flMidButton.setBackgroundResource(R.drawable.keyboard_on);
 	}
 }

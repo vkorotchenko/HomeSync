@@ -26,6 +26,8 @@
         android:layout_alignParentBottom="true"
         android:layout_toStartOf="@id/flKeyboardButton"
         android:layout_toLeftOf="@id/flKeyboardButton"
+
+        android:background="@drawable/layout_boarder"
         android:maxHeight="100dp"
         android:minHeight="100dp" />
 
@@ -38,6 +40,7 @@
         android:layout_alignParentBottom="true"
         android:layout_toEndOf="@id/flKeyboardButton"
         android:layout_toRightOf="@id/flKeyboardButton"
+        android:background="@drawable/layout_boarder"
         android:maxHeight="100dp"
         android:minHeight="100dp" />
 
