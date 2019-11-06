@@ -9,7 +9,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:background="@drawable/ic_keyboard_black_24dp"
+        android:background="@drawable/keyboard_on"
         android:fitsSystemWindows="false"
         android:maxWidth="60dp"
         android:maxHeight="100dp"

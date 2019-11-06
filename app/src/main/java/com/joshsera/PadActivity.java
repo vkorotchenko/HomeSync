@@ -1985,11 +1985,9 @@ public class PadActivity extends Activity {
 	// }
 
 	private void drawButtonOn(FrameLayout fl) {
-		//fl.setBackgroundResource(R.drawable.ic_button_outline);
 	}
 
 	private void drawButtonOff(FrameLayout fl) {
-		//fl.setBackgroundResource(R.drawable.ic_button_outline);
 	}
 
 	private void drawSoftOn() {
