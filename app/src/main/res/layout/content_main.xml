@@ -24,8 +24,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#2C4B50"
-                android:textColor="#FFF"
                 android:onClick="sendElectronicsBlindsUp"
                 android:text="@string/up" />
 
@@ -33,8 +31,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#2C4B50"
-                android:textColor="#FFF"
                 android:onClick="sendElectronicsBlindsStop"
                 android:text="@string/stop" />
 
@@ -42,8 +38,6 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:background="#2C4B50"
-                android:textColor="#FFF"
                 android:onClick="sendElectronicsBlindsDown"
                 android:text="@string/down" />
         </LinearLayout>
@@ -52,8 +46,6 @@
             android:id="@+id/button4"
             android:layout_width="fill_parent"
             android:layout_height="51dp"
-            android:background="#2C4B50"
-            android:textColor="#FFF"
             android:onClick="sendElectronicsBedroomLights"
             android:text="@string/bedroom" />
 
@@ -61,8 +53,6 @@
             android:id="@+id/button5"
             android:layout_width="fill_parent"
             android:layout_height="51dp"
-            android:background="#2C4B50"
-            android:textColor="#FFF"
             android:onClick="sendElectronicsLivingroomLights"
             android:text="@string/livingroom" />
 
@@ -70,8 +60,6 @@
             android:id="@+id/button6"
             android:layout_width="fill_parent"
             android:layout_height="51dp"
-            android:background="#2C4B50"
-            android:textColor="#FFF"
             android:onClick="sendElectronicsKitchenLights"
             android:text="@string/kitchen" />
 
@@ -79,8 +67,6 @@
             android:id="@+id/button7"
             android:layout_width="fill_parent"
             android:layout_height="51dp"
-            android:background="#2C4B50"
-            android:textColor="#FFF"
             android:onClick="sendElectronicsDiningLights"
             android:text="@string/dining" />
 
@@ -88,8 +74,6 @@
             android:id="@+id/button8"
             android:layout_width="fill_parent"
             android:layout_height="51dp"
-            android:background="#2C4B50"
-            android:textColor="#FFF"
             android:onClick="sendElectronicsPatioLights"
             android:text="@string/patio" />
 
