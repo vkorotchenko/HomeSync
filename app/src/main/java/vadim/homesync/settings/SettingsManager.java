@@ -36,7 +36,7 @@ public class SettingsManager {
 	}
 
 	private static void saveValue (Context context, String key, String value) {
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
+		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
 		SharedPreferences.Editor editor = settings.edit();
 		editor.putString(key, value);
 		editor.apply();
@@ -49,30 +49,6 @@ public class SettingsManager {
 
 	public static CharSequence getAddress(Context context) {
 		return getValue(context, Setting.SERVER_IP);
-//		ConnectivityManager connManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-//		NetworkInfo mWifi = connManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
-//
-//	    SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
-//
-//		if (mWifi.isConnected()) {
-//			  WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
-//			   WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-//			   Log.d("wifiInfo", wifiInfo.toString());
-//			   Log.d("SSID",wifiInfo.getSSID());
-//
-//			   String home_network =settings.getString("home_network", "KOR");
-//			   Log.d("HOME NETWORK",home_network);
-//			   if(wifiInfo.getSSID().replaceAll("\"", "").equals(home_network)){
-//				   return settings.getString("address", "192.168.1.1");
-//			   }else{
-//				   return settings.getString("external_address", "test1.dyndns.org");
-//
-//			   }
-//		}else{
-//			   return settings.getString("external_address", "test1.dyndns.org");
-//
-//		}
-
 	}
 	public static CharSequence getPort(Context context) {
 		return getValue(context, Setting.SERVER_PORT);
@@ -100,7 +76,7 @@ public class SettingsManager {
 
 
 	public static CharSequence getValue(Context context, Setting setting) {
-		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, 0);
+		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
 		return settings.getString(setting.getKey(), setting.getDefaultValue());
 	}
 
