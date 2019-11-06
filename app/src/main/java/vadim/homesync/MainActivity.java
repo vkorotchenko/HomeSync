@@ -2,20 +2,25 @@ package vadim.homesync;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
-import android.view.Menu;
-import android.view.MenuItem;
-
 import com.joshsera.PadActivity;
 
+import vadim.homesync.rest.RestClient;
+
 public class MainActivity extends AppCompatActivity {
+
+    RestClient rest_client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        rest_client = new RestClient(this);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -43,5 +48,30 @@ public class MainActivity extends AppCompatActivity {
 
         }
         return false;
+    }
+
+    public void sendElectronicsBlindsUp(View view) {
+        rest_client.sentElectronicsMsg("BLINDS_UP");
+    }
+    public void sendElectronicsBlindsStop(View view) {
+        rest_client.sentElectronicsMsg("BLINDS_STOP");
+    }
+    public void sendElectronicsBlindsDown(View view) {
+        rest_client.sentElectronicsMsg("BLINDS_DOWN");
+    }
+    public void sendElectronicsBedroomLights(View view) {
+        rest_client.sentElectronicsMsg("BEDROOM_LIGHTS");
+    }
+    public void sendElectronicsLivingroomLights(View view) {
+        rest_client.sentElectronicsMsg("LIVINGROOM_LIGHTS");
+    }
+    public void sendElectronicsKitchenLights(View view) {
+        rest_client.sentElectronicsMsg("KITCHENK_LIGHTS");
+    }
+    public void sendElectronicsDiningLights(View view) {
+        rest_client.sentElectronicsMsg("DINING_LIGHTS");
+    }
+    public void sendElectronicsPatioLights(View view) {
+        rest_client.sentElectronicsMsg("PATIO_LIGHTS");
     }
 }

@@ -24,4 +24,12 @@
     <string name="txt_recentlyUsedHosts" />
     <string name="toast_invalidIP" />
     <string name="external_port">External Port</string>
+    <string name="patio">Patio</string>
+    <string name="dining">Dining</string>
+    <string name="kitchen">Kitchen</string>
+    <string name="livingroom">Livingroom</string>
+    <string name="bedroom">Bedroom</string>
+    <string name="down">Down</string>
+    <string name="stop">Stop</string>
+    <string name="up">Up</string>
 </resources>

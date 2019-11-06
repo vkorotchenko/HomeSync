@@ -26,7 +26,8 @@
                 android:layout_weight="1"
                 android:background="#2C4B50"
                 android:textColor="#FFF"
-                android:text="Up" />
+                android:onClick="sendElectronicsBlindsUp"
+                android:text="@string/up" />
 
             <Button
                 android:layout_width="0dp"
@@ -34,7 +35,8 @@
                 android:layout_weight="1"
                 android:background="#2C4B50"
                 android:textColor="#FFF"
-                android:text="Stop" />
+                android:onClick="sendElectronicsBlindsStop"
+                android:text="@string/stop" />
 
             <Button
                 android:layout_width="0dp"
@@ -42,7 +44,8 @@
                 android:layout_weight="1"
                 android:background="#2C4B50"
                 android:textColor="#FFF"
-                android:text="Down" />
+                android:onClick="sendElectronicsBlindsDown"
+                android:text="@string/down" />
         </LinearLayout>
 
         <Button
@@ -51,7 +54,8 @@
             android:layout_height="51dp"
             android:background="#2C4B50"
             android:textColor="#FFF"
-            android:text="Bedroom" />
+            android:onClick="sendElectronicsBedroomLights"
+            android:text="@string/bedroom" />
 
         <Button
             android:id="@+id/button5"
@@ -59,7 +63,8 @@
             android:layout_height="51dp"
             android:background="#2C4B50"
             android:textColor="#FFF"
-            android:text="Button" />
+            android:onClick="sendElectronicsLivingroomLights"
+            android:text="@string/livingroom" />
 
         <Button
             android:id="@+id/button6"
@@ -67,7 +72,8 @@
             android:layout_height="51dp"
             android:background="#2C4B50"
             android:textColor="#FFF"
-            android:text="Button" />
+            android:onClick="sendElectronicsKitchenLights"
+            android:text="@string/kitchen" />
 
         <Button
             android:id="@+id/button7"
@@ -75,7 +81,8 @@
             android:layout_height="51dp"
             android:background="#2C4B50"
             android:textColor="#FFF"
-            android:text="Button" />
+            android:onClick="sendElectronicsDiningLights"
+            android:text="@string/dining" />
 
         <Button
             android:id="@+id/button8"
@@ -83,7 +90,8 @@
             android:layout_height="51dp"
             android:background="#2C4B50"
             android:textColor="#FFF"
-            android:text="Button" />
+            android:onClick="sendElectronicsPatioLights"
+            android:text="@string/patio" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
