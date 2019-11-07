@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
+import android.widget.Switch;
 
 import vadim.homesync.settings.SettingsManager;
 
@@ -26,6 +27,7 @@ public class SettingsActivity extends Activity implements OnItemSelectedListener
 		EditText networkText = findViewById(R.id.home_network_entry);
 		EditText externalText = findViewById(R.id.external_address_entry);
 		EditText externalPortText = findViewById(R.id.external_port_entry);
+		Switch experimentalInput = findViewById(R.id.experimental_ai_input);
 
 		// Restore preferences
 	    ipText.setText(SettingsManager.getAddress(this));
@@ -34,6 +36,7 @@ public class SettingsActivity extends Activity implements OnItemSelectedListener
 	    networkText.setText(SettingsManager.getHomeSsid(this));
 	    externalText.setText(SettingsManager.getExternalIp(this));
 	    externalPortText.setText(SettingsManager.getExternalPort(this));
+		experimentalInput.setChecked(SettingsManager.getExperimentalAi(this));
 
 	}
 
@@ -51,6 +54,7 @@ public class SettingsActivity extends Activity implements OnItemSelectedListener
 		EditText networkText = findViewById(R.id.home_network_entry);
 		EditText externalText = findViewById(R.id.external_address_entry);
 		EditText externalPortText = findViewById(R.id.external_port_entry);
+		Switch experimentalInput = findViewById(R.id.experimental_ai_input);
 
 		SettingsManager.saveAddress(this,ipText.getText().toString());
 		SettingsManager.savePort(this,portText.getText().toString());
@@ -58,7 +62,8 @@ public class SettingsActivity extends Activity implements OnItemSelectedListener
 		SettingsManager.saveHomeSsid(this,networkText.getText().toString());
 		SettingsManager.saveExternalAddress(this,externalText.getText().toString());
 		SettingsManager.saveExternalPort(this,externalPortText.getText().toString());
-							
+		SettingsManager.saveExperimental(this,experimentalInput.isChecked());
+
 		//close settings window
 		finish();
 	}

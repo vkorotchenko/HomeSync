@@ -13,6 +13,7 @@ import androidx.appcompat.widget.Toolbar;
 import com.joshsera.PadActivity;
 
 import vadim.homesync.rest.RestClient;
+import vadim.homesync.settings.SettingsManager;
 import vadim.homesync.util.ConnectionUtils;
 import vadim.homesync.util.HttpUtils;
 
@@ -27,6 +28,15 @@ public class MainActivity extends AppCompatActivity {
 
         //save external address if on WiFi
         populateExternalIp(this);
+
+        if(SettingsManager.getExperimentalAi(this)) {
+            //close blinds when leave WiFi
+
+            //Open blinds when alarm goes off and connected to WiFi
+
+            //turn on lights when connect to Wifi
+
+        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);

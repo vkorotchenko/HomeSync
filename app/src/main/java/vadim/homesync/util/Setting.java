@@ -7,6 +7,7 @@ public enum Setting {
     HOME_SSID("home_ssid", "KOR"),
     MSG_PROTOCOL("msg_type", "UART"),
     EXTERNAL_PORT("external_port", ""),
+    EXPERIMENTAL_AI("experimental_ai", "true"),
     EXTERNAL_IP("external_ip", "");
 
 

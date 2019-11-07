@@ -6,7 +6,7 @@ import android.content.SharedPreferences;
 import vadim.homesync.util.Setting;
 
 public class SettingsManager {
-    public static final String CONFIG_NAME = "MyConfigFile";
+    private static final String CONFIG_NAME = "MyConfigFile";
 
 	public static void saveAddress(Context context, String value) {
 		saveValue(context, Setting.SERVER_IP.getKey(), value);
@@ -33,6 +33,10 @@ public class SettingsManager {
 
 	public static void saveExternalPort(Context context, String value) {
 		saveValue(context, Setting.EXTERNAL_PORT.getKey(), value);
+	}
+
+	public static void saveExperimental(Context context, boolean value) {
+		saveValue(context, Setting.EXPERIMENTAL_AI.getKey(), String.valueOf(value));
 	}
 
 	private static void saveValue (Context context, String key, String value) {
@@ -74,11 +78,11 @@ public class SettingsManager {
 		return getValue(context, Setting.HOME_SSID);
 	}
 
-
-	public static CharSequence getValue(Context context, Setting setting) {
+	public static boolean getExperimentalAi(Context context) {
+		return Boolean.valueOf(getValue(context, Setting.EXPERIMENTAL_AI).toString());
+	}
+	private static CharSequence getValue(Context context, Setting setting) {
 		SharedPreferences settings = context.getSharedPreferences(CONFIG_NAME, Context.MODE_PRIVATE);
 		return settings.getString(setting.getKey(), setting.getDefaultValue());
 	}
-
-
 }
