@@ -1,9 +1,9 @@
 package vadim.homesync.rest;
 
-import android.app.Activity;
 import android.content.Context;
 import android.util.Pair;
 
+import vadim.homesync.common.Message;
 import vadim.homesync.settings.SettingsManager;
 import vadim.homesync.util.ConnectionUtils;
 import vadim.homesync.util.HttpUtils;
@@ -15,10 +15,10 @@ public class RestClient {
         this.context = context;
     }
 
-    public void sentElectronicsMsg(String msg) {
+    public void sentElectronicsMsg(Message msg) {
         try {
-            String uri = getBaseURIString() + "/Electronics/" + msg + "/" + SettingsManager.getMsgType((Activity) context);
-            HttpUtils.sendMsg(uri,context);
+            String uri = getBaseURIString() + "/Electronics/" + msg.getKey() + "/" + SettingsManager.getMsgType(context);
+            HttpUtils.sendMsg(uri, context);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -31,8 +31,4 @@ public class RestClient {
 
         return "http://" + address + ":" + port + "/api/rest/Remote";
     }
-
-
-
-
 } 

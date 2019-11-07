@@ -3,7 +3,7 @@ package vadim.homesync.settings;
 import android.content.Context;
 import android.content.SharedPreferences;
 
-import vadim.homesync.util.Setting;
+import vadim.homesync.common.Setting;
 
 public class SettingsManager {
     private static final String CONFIG_NAME = "MyConfigFile";

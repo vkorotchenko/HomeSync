@@ -5,11 +5,14 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.ConnectivityManager;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -22,10 +25,18 @@ import androidx.core.content.ContextCompat;
 
 import com.joshsera.PadActivity;
 
+import vadim.homesync.listener.BroadcastListener;
 import vadim.homesync.rest.RestClient;
 import vadim.homesync.settings.SettingsManager;
-import vadim.homesync.util.ConnectionUtils;
-import vadim.homesync.util.HttpUtils;
+
+import static vadim.homesync.common.Message.BEDROOM_LIGHTS;
+import static vadim.homesync.common.Message.BLINDS_DOWN;
+import static vadim.homesync.common.Message.BLINDS_STOP;
+import static vadim.homesync.common.Message.BLINDS_UP;
+import static vadim.homesync.common.Message.DINING_LIGHTS;
+import static vadim.homesync.common.Message.KITCHEN_LIGHTS;
+import static vadim.homesync.common.Message.LIVING_ROOM_LIGHTS;
+import static vadim.homesync.common.Message.PATIO_LIGHTS;
 
 public class MainActivity extends AppCompatActivity implements LocationListener {
     public static final int MY_PERMISSIONS_REQUEST_LOCATION = 99;
@@ -38,13 +49,13 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         rest_client = new RestClient(this);
 
-        //save external address if on WiFi
-        populateExternalIp(this);
-
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         checkLocationPermission();
+
         if(SettingsManager.getExperimentalAi(this)) {
+
+            this.initBroadcastLIstener();
             //close blinds when leave WiFi
 
             //Open blinds when alarm goes off and connected to WiFi
@@ -57,10 +68,11 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         setSupportActionBar(toolbar);
     }
 
-    private void populateExternalIp(Context context) {
-        if(ConnectionUtils.isConnectedToHomeWiFi(context)) {
-            HttpUtils.setExternal(context);
-        }
+    private void initBroadcastLIstener() {
+        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
+        filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
+        this.registerReceiver(new BroadcastListener(), filter);
+
     }
 
     @Override
@@ -153,28 +165,28 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     }
 
     public void sendElectronicsBlindsUp(View view) {
-        rest_client.sentElectronicsMsg("BLINDS_UP");
+        rest_client.sentElectronicsMsg(BLINDS_UP);
     }
     public void sendElectronicsBlindsStop(View view) {
-        rest_client.sentElectronicsMsg("BLINDS_STOP");
+        rest_client.sentElectronicsMsg(BLINDS_STOP);
     }
     public void sendElectronicsBlindsDown(View view) {
-        rest_client.sentElectronicsMsg("BLINDS_DOWN");
+        rest_client.sentElectronicsMsg(BLINDS_DOWN);
     }
     public void sendElectronicsBedroomLights(View view) {
-        rest_client.sentElectronicsMsg("BEDROOM_LIGHTS");
+        rest_client.sentElectronicsMsg(BEDROOM_LIGHTS);
     }
     public void sendElectronicsLivingroomLights(View view) {
-        rest_client.sentElectronicsMsg("LIVINGROOM_LIGHTS");
+        rest_client.sentElectronicsMsg(LIVING_ROOM_LIGHTS);
     }
     public void sendElectronicsKitchenLights(View view) {
-        rest_client.sentElectronicsMsg("KITCHENK_LIGHTS");
+        rest_client.sentElectronicsMsg(KITCHEN_LIGHTS);
     }
     public void sendElectronicsDiningLights(View view) {
-        rest_client.sentElectronicsMsg("DINING_LIGHTS");
+        rest_client.sentElectronicsMsg(DINING_LIGHTS);
     }
     public void sendElectronicsPatioLights(View view) {
-        rest_client.sentElectronicsMsg("PATIO_LIGHTS");
+        rest_client.sentElectronicsMsg(PATIO_LIGHTS);
     }
 
     @Override

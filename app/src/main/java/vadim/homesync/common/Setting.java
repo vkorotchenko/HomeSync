@@ -1,4 +1,4 @@
-package vadim.homesync.util;
+package vadim.homesync.common;
 
 public enum Setting {
     SERVER_IP( "server_ip", "192.168.0.111"),
