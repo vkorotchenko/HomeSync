@@ -46,7 +46,7 @@ public class HttpUtils {
                     public void onResponse(String response) {
                         Log.d("HttpUtils",String.format("Get call completed to %s", uri));
                         // Display the first 500 characters of the response string.
-                        SettingsManager.saveExternalAddress(context,response.substring(0, 500));
+                        SettingsManager.saveExternalAddress(context,response);
                     }
                 }, new Response.ErrorListener() {
             @Override
