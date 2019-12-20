@@ -18,6 +18,7 @@ import androidx.core.app.NotificationManagerCompat;
 import vadim.homesync.R;
 import vadim.homesync.common.Action;
 import vadim.homesync.receivers.ActionReceiver;
+import vadim.homesync.receivers.CancelReceiver;
 import vadim.homesync.settings.SettingsManager;
 import vadim.homesync.util.ConnectionUtils;
 
@@ -83,18 +84,24 @@ public class BroadcastListener extends BroadcastReceiver {
 
         private void disaplyNotification(Context context, Action action) {
             Intent intentAction = new Intent(context, ActionReceiver.class);
-
             intentAction.putExtra("action", action.getAction());
+            PendingIntent pIntentAction = PendingIntent.getBroadcast(context, 0, intentAction, PendingIntent.FLAG_UPDATE_CURRENT);
 
-            PendingIntent pIntentlogin = PendingIntent.getBroadcast(context, 1, intentAction, PendingIntent.FLAG_UPDATE_CURRENT);
+            Intent intentCancel = new Intent(context, CancelReceiver.class);
+            intentCancel.putExtra("id", action.getId());
+            PendingIntent pIntentCancel = PendingIntent.getBroadcast(context, 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
+
             NotificationCompat.Builder builder = getNotificationBuilder(context,
                     "com.example.your_app.notification.CHANNEL_ID_FOREGROUND",
-                    NotificationManagerCompat.IMPORTANCE_LOW);
+                    NotificationManagerCompat.IMPORTANCE_MAX);
             builder.setContentTitle(action.getTitle())
                     .setContentText(action.getText())
-                    .addAction(R.drawable.come_go, action.getButton(), pIntentlogin)
+                    .addAction(R.drawable.ok, action.getButton(), pIntentAction)
+                    .addAction(R.drawable.cancel, "Cancel", pIntentCancel)
                     .setSmallIcon(R.drawable.come_go)
                     .setOngoing(true)
+                    .setPriority(NotificationManager.IMPORTANCE_HIGH)
+                    .setWhen(0)
                     .setAutoCancel(true);
 
 

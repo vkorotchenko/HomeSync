@@ -43,6 +43,7 @@
             android:enabled="true"
             android:exported="true" />
         <receiver android:name=".receivers.ActionReceiver"></receiver>
+        <receiver android:name=".receivers.CancelReceiver"></receiver>
     </application>
 
 </manifest>

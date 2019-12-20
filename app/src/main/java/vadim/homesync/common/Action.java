@@ -2,7 +2,8 @@ package vadim.homesync.common;
 
 public enum Action {
     ON_ARRIVE("ON_ARRIVE","Arriving Home","Turn on Lights?","Turn on", 29783),
-    ON_DEPART("ON_DEPART","Leaving Home","Close blinds?","Close",0327652);
+    ON_DEPART("ON_DEPART","Leaving Home","Close blinds?","Close",0327652),
+    NETWORK("NETWORK","Leaving Home","Close blinds?","Close",28736423);
 
     private final String action;
     private final String title;

@@ -22,9 +22,6 @@ public class ActionReceiver  extends BroadcastReceiver {
         } else if (action.equals(Action.ON_ARRIVE.getAction())) {
             onArriveHome(context, Action.ON_ARRIVE);
         }
-        //This is used to close the notification tray
-        Intent it = new Intent(Intent.ACTION_CLOSE_SYSTEM_DIALOGS);
-        context.sendBroadcast(it);
     }
 
     private void onDepartHome(Context context, Action action) {

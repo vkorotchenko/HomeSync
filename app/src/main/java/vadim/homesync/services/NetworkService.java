@@ -17,6 +17,7 @@ import androidx.core.app.NotificationCompat;
 
 import vadim.homesync.MainActivity;
 import vadim.homesync.R;
+import vadim.homesync.common.Action;
 import vadim.homesync.listener.BroadcastListener;
 import vadim.homesync.settings.SettingsManager;
 
@@ -42,7 +43,7 @@ public class NetworkService extends Service {
         PendingIntent pendingIntent = PendingIntent.getActivity(this,
                 0, notificationIntent, 0);
         Notification notification = new NotificationCompat.Builder(this, CHANNEL_ID)
-                .setContentTitle("HomeSync Network Listener")
+                .setContentTitle(Action.NETWORK.getTitle())
                 .setContentText(input)
                 .setSmallIcon(R.drawable.ic_network_check_black_24dp)
                 .setContentIntent(pendingIntent)
@@ -77,7 +78,7 @@ public class NetworkService extends Service {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel serviceChannel = new NotificationChannel(
                     CHANNEL_ID,
-                    "Foreground Service Channel",
+                    Action.NETWORK.getText(),
                     NotificationManager.IMPORTANCE_DEFAULT
             );
             NotificationManager manager = getSystemService(NotificationManager.class);
