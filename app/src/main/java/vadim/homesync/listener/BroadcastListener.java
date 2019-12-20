@@ -19,6 +19,7 @@ import vadim.homesync.R;
 import vadim.homesync.common.Action;
 import vadim.homesync.receivers.ActionReceiver;
 import vadim.homesync.receivers.CancelReceiver;
+import vadim.homesync.services.NetworkService;
 import vadim.homesync.settings.SettingsManager;
 import vadim.homesync.util.ConnectionUtils;
 
@@ -92,7 +93,7 @@ public class BroadcastListener extends BroadcastReceiver {
             PendingIntent pIntentCancel = PendingIntent.getBroadcast(context, 0, intentCancel, PendingIntent.FLAG_CANCEL_CURRENT);
 
             NotificationCompat.Builder builder = getNotificationBuilder(context,
-                    "com.example.your_app.notification.CHANNEL_ID_FOREGROUND",
+                    NetworkService.CHANNEL_ID,
                     NotificationManagerCompat.IMPORTANCE_HIGH);
             builder.setContentTitle(action.getTitle())
                     .setContentText(action.getText())
