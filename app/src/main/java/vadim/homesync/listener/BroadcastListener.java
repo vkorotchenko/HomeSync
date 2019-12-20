@@ -93,7 +93,7 @@ public class BroadcastListener extends BroadcastReceiver {
 
             NotificationCompat.Builder builder = getNotificationBuilder(context,
                     "com.example.your_app.notification.CHANNEL_ID_FOREGROUND",
-                    NotificationManagerCompat.IMPORTANCE_MAX);
+                    NotificationManagerCompat.IMPORTANCE_HIGH);
             builder.setContentTitle(action.getTitle())
                     .setContentText(action.getText())
                     .addAction(R.drawable.ok, action.getButton(), pIntentAction)

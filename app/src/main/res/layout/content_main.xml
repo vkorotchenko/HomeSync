@@ -31,26 +31,26 @@
             tools:layout_editor_absoluteX="34dp" />
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="60dp"
             android:weightSum="3">
 
             <Button
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:onClick="sendElectronicsBlindsUp"
                 android:text="@string/up" />
 
             <Button
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:onClick="sendElectronicsBlindsStop"
                 android:text="@string/stop" />
 
             <Button
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="60dp"
                 android:layout_weight="1"
                 android:onClick="sendElectronicsBlindsDown"
                 android:text="@string/down" />
@@ -68,35 +68,35 @@
         <Button
             android:id="@+id/button4"
             android:layout_width="fill_parent"
-            android:layout_height="51dp"
+            android:layout_height="60dp"
             android:onClick="sendElectronicsBedroomLights"
             android:text="@string/bedroom" />
 
         <Button
             android:id="@+id/button5"
             android:layout_width="fill_parent"
-            android:layout_height="51dp"
+            android:layout_height="60dp"
             android:onClick="sendElectronicsLivingroomLights"
             android:text="@string/livingroom" />
 
         <Button
             android:id="@+id/button6"
             android:layout_width="fill_parent"
-            android:layout_height="51dp"
+            android:layout_height="60dp"
             android:onClick="sendElectronicsKitchenLights"
             android:text="@string/kitchen" />
 
         <Button
             android:id="@+id/button7"
             android:layout_width="fill_parent"
-            android:layout_height="51dp"
+            android:layout_height="60dp"
             android:onClick="sendElectronicsDiningLights"
             android:text="@string/dining" />
 
         <Button
             android:id="@+id/button8"
             android:layout_width="fill_parent"
-            android:layout_height="51dp"
+            android:layout_height="60dp"
             android:onClick="sendElectronicsPatioLights"
             android:text="@string/patio" />
 

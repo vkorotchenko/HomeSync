@@ -11,7 +11,7 @@ public class CancelReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Integer id = intent.getIntExtra("id", 0);
+        int id = intent.getIntExtra("id", 0);
 
         NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
         notificationManager.cancel(id);

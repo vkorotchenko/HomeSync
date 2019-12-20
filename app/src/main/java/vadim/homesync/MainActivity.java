@@ -22,6 +22,7 @@ import androidx.core.content.ContextCompat;
 
 import com.joshsera.PadActivity;
 
+import vadim.homesync.common.Action;
 import vadim.homesync.rest.RestClient;
 import vadim.homesync.services.NetworkService;
 
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
 
     public void startNetworkService() {
         Intent serviceIntent = new Intent(this, NetworkService.class);
-        serviceIntent.putExtra("inputExtra", "HomeSync Network Listener");
+        serviceIntent.putExtra("inputExtra", Action.NETWORK.getText());
         ContextCompat.startForegroundService(this, serviceIntent);
     }
 
