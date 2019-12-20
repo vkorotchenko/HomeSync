@@ -139,10 +139,10 @@ public class BroadcastListener extends BroadcastReceiver {
             }
         }
 
-            @Override
-            protected void onPostExecute (String s){
-                super.onPostExecute(s);
-                pendingResult.finish();
-            }
+        @Override
+        protected void onPostExecute(String s) {
+            super.onPostExecute(s);
+            pendingResult.finish();
         }
     }
+}
