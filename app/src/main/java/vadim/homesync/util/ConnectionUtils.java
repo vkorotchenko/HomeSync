@@ -14,6 +14,8 @@ import vadim.homesync.settings.SettingsManager;
 
 public class ConnectionUtils {
 
+    private static final String UNKNOWN_SSID = "";
+
     public static Pair<CharSequence, CharSequence> getConnection(Context context) {
         if (isConnectedToHomeWiFi(context)) {
             return new Pair<>(SettingsManager.getAddress(context), SettingsManager.getPort(context));
@@ -21,7 +23,7 @@ public class ConnectionUtils {
         return new Pair<>(SettingsManager.getExternalIp(context), SettingsManager.getExternalPort(context));
     }
 
-    private static Boolean hasWiFi(Context context) {
+    public static Boolean hasWiFi(Context context) {
         ConnectivityManager connectivity = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         Network[] networks = Objects.requireNonNull(connectivity).getAllNetworks();
         for (Network network : networks) {
@@ -33,16 +35,21 @@ public class ConnectionUtils {
         return Boolean.FALSE;
     }
 
-
     public static boolean isConnectedToHomeWiFi(Context context) {
+        String home_network = SettingsManager.getHomeSsid(context).toString();
+        return home_network.equals(getCurrentSsid(context));
+    }
+
+    public static String getCurrentSsid(Context context) {
         if (hasWiFi(context)) {
             WifiManager wifiManager = (WifiManager) context.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
             WifiInfo wifiInfo = Objects.requireNonNull(wifiManager).getConnectionInfo();
-            String home_network = SettingsManager.getHomeSsid(context).toString();
-            if (wifiInfo.getSSID().replaceAll("\"", "").equals(home_network)) {
-                return Boolean.TRUE;
+            if (wifiInfo.getSSID().equals(UNKNOWN_SSID)) {
+                return null;
             }
+
+            return wifiInfo.getSSID().replaceAll("\"", "");
         }
-        return Boolean.FALSE;
+        return null;
     }
 }

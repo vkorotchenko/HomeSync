@@ -11,6 +11,7 @@
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE" />
 
     <application
         android:allowBackup="true"
@@ -37,6 +38,11 @@
             android:name=".SettingsActivity"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name="com.joshsera.PadActivity" />
+
+        <service android:name=".services.NetworkService"
+            android:enabled="true"
+            android:exported="true" />
+        <receiver android:name=".receivers.ActionReceiver"></receiver>
     </application>
 
 </manifest>

@@ -5,14 +5,11 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.net.ConnectivityManager;
-import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,9 +22,8 @@ import androidx.core.content.ContextCompat;
 
 import com.joshsera.PadActivity;
 
-import vadim.homesync.listener.BroadcastListener;
 import vadim.homesync.rest.RestClient;
-import vadim.homesync.settings.SettingsManager;
+import vadim.homesync.services.NetworkService;
 
 import static vadim.homesync.common.Message.BEDROOM_LIGHTS;
 import static vadim.homesync.common.Message.BLINDS_DOWN;
@@ -49,30 +45,21 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
         super.onCreate(savedInstanceState);
         rest_client = new RestClient(this);
 
+        startNetworkService();
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         provider = locationManager.getBestProvider(new Criteria(), false);
         checkLocationPermission();
-
-        if(SettingsManager.getExperimentalAi(this)) {
-
-            this.initBroadcastLIstener();
-            //close blinds when leave WiFi
-
-            //Open blinds when alarm goes off and connected to WiFi
-
-            //turn on lights when connect to Wifi
-        }
 
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
 
-    private void initBroadcastLIstener() {
-        IntentFilter filter = new IntentFilter(ConnectivityManager.CONNECTIVITY_ACTION);
-        filter.addAction(WifiManager.SUPPLICANT_CONNECTION_CHANGE_ACTION);
-        this.registerReceiver(new BroadcastListener(), filter);
-
+    public void startNetworkService() {
+        Intent serviceIntent = new Intent(this, NetworkService.class);
+        serviceIntent.putExtra("inputExtra", "HomeSync Network Listener");
+        ContextCompat.startForegroundService(this, serviceIntent);
     }
 
     @Override
@@ -136,55 +123,49 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case MY_PERMISSIONS_REQUEST_LOCATION: {
-                // If request is cancelled, the result arrays are empty.
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+        if (requestCode == MY_PERMISSIONS_REQUEST_LOCATION) {
+            if (grantResults.length > 0
+                    && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
 
-                    // permission was granted, yay! Do the
-                    // location-related task you need to do.
-                    if (ContextCompat.checkSelfPermission(this,
-                            Manifest.permission.ACCESS_FINE_LOCATION)
-                            == PackageManager.PERMISSION_GRANTED) {
+                if (ContextCompat.checkSelfPermission(this,
+                        Manifest.permission.ACCESS_FINE_LOCATION)
+                        == PackageManager.PERMISSION_GRANTED) {
 
-                        //Request location updates:
-                        locationManager.requestLocationUpdates(provider, 400, 1, this);
-                    }
-
-                } else {
-
-                    // permission denied, boo! Disable the
-                    // functionality that depends on this permission.
-
+                    locationManager.requestLocationUpdates(provider, 400, 1, this);
                 }
-                return;
-            }
 
+            }
         }
     }
 
     public void sendElectronicsBlindsUp(View view) {
         rest_client.sentElectronicsMsg(BLINDS_UP);
     }
+
     public void sendElectronicsBlindsStop(View view) {
         rest_client.sentElectronicsMsg(BLINDS_STOP);
     }
+
     public void sendElectronicsBlindsDown(View view) {
         rest_client.sentElectronicsMsg(BLINDS_DOWN);
     }
+
     public void sendElectronicsBedroomLights(View view) {
         rest_client.sentElectronicsMsg(BEDROOM_LIGHTS);
     }
+
     public void sendElectronicsLivingroomLights(View view) {
         rest_client.sentElectronicsMsg(LIVING_ROOM_LIGHTS);
     }
+
     public void sendElectronicsKitchenLights(View view) {
         rest_client.sentElectronicsMsg(KITCHEN_LIGHTS);
     }
+
     public void sendElectronicsDiningLights(View view) {
         rest_client.sentElectronicsMsg(DINING_LIGHTS);
     }
+
     public void sendElectronicsPatioLights(View view) {
         rest_client.sentElectronicsMsg(PATIO_LIGHTS);
     }
@@ -210,6 +191,7 @@ public class MainActivity extends AppCompatActivity implements LocationListener 
             locationManager.removeUpdates(this);
         }
     }
+
     @Override
     public void onLocationChanged(Location location) {
 

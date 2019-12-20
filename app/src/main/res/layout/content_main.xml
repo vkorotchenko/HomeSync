@@ -19,6 +19,16 @@
         tools:layout_editor_absoluteX="7dp"
         tools:layout_editor_absoluteY="14dp">
 
+        <TextView
+            android:id="@+id/textViewBlinds"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:lineSpacingExtra="10sp"
+            android:text="@string/blinds"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:layout_editor_absoluteX="34dp" />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -46,6 +56,15 @@
                 android:text="@string/down" />
         </LinearLayout>
 
+        <TextView
+            android:id="@+id/textViewLights"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="monospace"
+            android:text="@string/lights"
+            android:textAlignment="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            tools:layout_editor_absoluteX="34dp" />
         <Button
             android:id="@+id/button4"
             android:layout_width="fill_parent"
@@ -82,4 +101,6 @@
             android:text="@string/patio" />
 
     </LinearLayout>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

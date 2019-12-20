@@ -36,4 +36,6 @@
     <string name="title_location_permission">Location Permission</string>
     <string name="text_location_permission">Please enable location permission</string>
     <string name="ok">OK</string>
+    <string name="lights">Lights</string>
+    <string name="blinds">Blinds</string>
 </resources>
